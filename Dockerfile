@@ -5,7 +5,7 @@ MAINTAINER Bernd Heidemann <b.heidemannk@schule.bremen.de>
 
 ARG JAR_FILE
 #COPY target/${JAR_FILE} /employee.jar
-COPY target/employeemanagement-1.1.3.jar /employee.jar
+COPY target/employeemanagement_authentik-1.0.0.jar /employee.jar
 
 ARG SPRING_BOOT_PROFILE
 

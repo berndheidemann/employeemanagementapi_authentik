@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>de.szut</groupId>
-    <artifactId>employeemanagement</artifactId>
-    <version>1.1.3</version>
-    <name>employeemanagement</name>
-    <description>employeemanagement</description>
+    <artifactId>employeemanagement_authentik</artifactId>
+    <version>1.0.0</version>
+    <name>employeemanagement_authentik</name>
+    <description>employeemanagement_authentik</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
