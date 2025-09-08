@@ -1,0 +1,84 @@
+@token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjkzNzFlNTM0YzkwNGNhOGZjODcwODI0NTg0YjQ1ZDEyIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiODliNzNkNDViODkwMmZlMjVlYmVlMTc1ZTZhNzVmNTVlNTQ3YzRjMzE3N2Y2NzhhNjdlMmU3NTk2MGVmM2JhMyIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3NTczMjM2MjQsImlhdCI6MTc1NzMyMDYyNCwiYXV0aF90aW1lIjoxNzU3MzIwNjI0LCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiTmVuRUlXZURnV2tuUHdiUVlzSnc0c2VxOXVyUld2bkFSeVduM1RhZyJ9.iFvh5NXs_C-F4ESzHybIlCBnRNzt2k4cQAnPTJRcxHozH3TXDVgNaZphfvlIbfsFsbsvKFRyiirAPmR9pJqM3lumEapkT0ofMWW6JieKnyyX_IR_qq925UPUY3RMshZhX4kOJx1XvMCEGqr_wtXOTFEy-asUgqg5byD4LnN8fH3WhQFz4FW_hgryP6_19jAGVDb8FBPAxKuvjPlmL5ruCXZ-S_D35lhfXcVv5Zi9nT9-_1Lb_RuuXUCtDi1RXDJVkpJLyt2_FjPUUB0WfOl6WNw0gYF58CwU4PsSxMzJCJjhjnNCeYYHj_6tDXENccZZFoGWfKGT2XyutkrR33p_y0YN16f42-iMu0fyHkgJn6wIa8KNdlw_VjE6hvXsqM-e4mEpPgz1AP4v22woL7HWLV6YI_C7a4KhVSUmVwFHBRm6Y0cVwOlKWIVuBEp9YmNcMmmmTVHYMJVK5pr0Lsst6Agng0oW9klNhtj_NgbHjlULzuar-u6BSZSdkJ1UeHFJo_Ck07zVgcNuwhwjTD4l5UdilWB0xUshUxU3OJyM_CgeQo_j4jucPmo5UdvgKv-ftq47PakGQX0zbSxI8refSOMbMA57Bu_wmFeN-8LC3yB4RUNfDEI70VN2UPaA2q7cjgH5URvE2LovgGDk4CW09I0PCX2UQSwf2rvCHw3HhZs
+
+# @no-cookie-jar
+GET http://localhost:8089/employees
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+# curl -d "grant_type=password&username=john&password=geheim&client_id=employee_api&scope=openid"
+#  http://localhost:9000/application/o/token/
+POST http://localhost:9000/application/o/token/
+Content-Type: application/x-www-form-urlencoded
+
+grant_type = client_credentials &
+username = john &
+password = ZPLIjqn0njS6O6dSRr3smSwAlEcg9h1HL4R8oKJZRjxMLwd9L4yG81x8sNDK &
+client_id = employee_api_client &
+scope = openid
+
+###
+
+
+###
+
+
+
+# curl --location --request POST 'localhost:8080/employee_api/employees'
+#--data-raw '{
+#    "lastName": "Bertram",
+#    "firstName": "Horst",
+#    "street":"Bismarckstraße 30",
+#    "postcode": "2820",
+#    "city": "Bremen",
+#    "phone": "01635622014"
+#}'
+POST localhost:8089/employees
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "lastName": "Bertram",
+    "firstName": "Horst",
+    "street":"Bismarckstraße 30",
+    "postcode": "28202",
+    "city": "Bremen",
+    "phone": "01635622014"
+}
+
+###
+
+
+###
+
+GET http://localhost:8089/qualifications
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+POST http://localhost:8089/qualifications
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "skill": "foo2e-23"
+}
+
+###
+
+GET http://localhost:8089/qualifications/designation/employees
+Content-Type: application/json
+
+{
+  "designation": "foo"
+}
+
+
+###
+GET http://localhost:8089/employees
+Authorization: Bearer {{token}}
+Accept: application/json
+
+
+

@@ -1,0 +1,48 @@
+version: '3'
+
+volumes:
+    employee_postgres_data:
+        driver: local
+    keycloak_postgres_data:
+        driver: local
+
+services:
+    postgres_for_employee_service:
+        container_name: employee_postgres_container
+        image: postgres:13.3
+        volumes:
+            - employee_postgres_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: employee_db
+            POSTGRES_USER: employee
+            POSTGRES_PASSWORD: secret
+        ports:
+            - "5432:5432"
+
+    postgres_for_keycloak:
+        image: postgres:13.3
+        volumes:
+            - keycloak_postgres_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: ${KEYCLOAK_POSTGRESQL_DB}
+            POSTGRES_USER: ${KEYCLOAK_POSTGRESQL_USER}
+            POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRESQL_PASSWORD}
+
+    keycloak:
+        image: jboss/keycloak:13.0.1
+        volumes:
+            - ./keycloak_imports:/opt/jboss/keycloak/imports
+        environment:
+            DB_VENDOR: POSTGRES
+            DB_ADDR: postgres_for_keycloak
+            DB_DATABASE: ${KEYCLOAK_POSTGRESQL_DB}
+            DB_SCHEMA: public
+            DB_USER: ${KEYCLOAK_POSTGRESQL_USER}
+            DB_PASSWORD: ${KEYCLOAK_POSTGRESQL_PASSWORD}
+            KEYCLOAK_USER: ${KEYCLOAK_USER}
+            KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-szut.json
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgres_for_keycloak
